@@ -43,8 +43,9 @@ public class DeckOfCards {
 		}
 	}
 	
-	// resets and shuffles the deck to begin a new round 
-	public void reset(){
+	// method for creating an array of 52 PlayingCard objects
+	//  (used to avoid code duplication between reset() and constructor)
+	private void initialiseDeck(){
 		for (int i=0;i<13;i++){
 			int faceValue = i+1;
 			int gameValue = i+1; 
@@ -75,6 +76,11 @@ public class DeckOfCards {
 			deck[i+26] = new PlayingCard(type, PlayingCard.HEARTS, faceValue, gameValue);
 			deck[i+39] = new PlayingCard(type, PlayingCard.SPADES, faceValue, gameValue);
 		}
+	}
+	
+	// resets and shuffles the deck to begin a new round 
+	public void reset(){
+		initialiseDeck();
 		shuffle();
 		this.cardsUsed = 0;
 	}
@@ -94,38 +100,9 @@ public class DeckOfCards {
 		return output;
 	}
 	
-	// Empty Public Constructor calls the PlayingCard constructor 52 times and sets cardsUsed=0
+	// Empty Public Constructor initialises and shuffles the deck and sets cardsUsed=0
 	public DeckOfCards(){
-		for (int i=0;i<13;i++){
-			int faceValue = i+1;
-			int gameValue = i+1; 
-			String type;
-			
-			// switch statement sets the value of type to the correct value
-			switch(i+1){
-				case 1:
-					type = "A";
-					gameValue = 14;
-					break;
-				case 11:
-					type = "J";
-					break;
-				case 12:
-					type = "Q";
-					break;
-				case 13:
-					type = "K";
-					break;
-				default:
-					type = Integer.toString(i+1);
-			}
-			
-			// On each iteration of the loop, all 4 cards of the same type are made and added to the cardArray
-			deck[i] = new PlayingCard(type, PlayingCard.CLUBS, faceValue, gameValue);
-			deck[i+13] = new PlayingCard(type, PlayingCard.DIAMONDS, faceValue, gameValue);
-			deck[i+26] = new PlayingCard(type, PlayingCard.HEARTS, faceValue, gameValue);
-			deck[i+39] = new PlayingCard(type, PlayingCard.SPADES, faceValue, gameValue);
-		}
+		initialiseDeck();
 		shuffle();
 		this.cardsUsed = 0;
 	}
