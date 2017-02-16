@@ -238,7 +238,6 @@ public class HandOfCards {
 		for (int i=0;i<100000;i++){
 			DeckOfCards deck = new DeckOfCards();
 			HandOfCards hand = new HandOfCards(deck);
-			PlayingCard[] cards = new PlayingCard[HAND_SIZE];
 			int numTestsPassed = 0;
 			if (hand.isRoyalFlush()) { numTestsPassed++; };
 			if (hand.isStraightFlush()) { numTestsPassed++; };
