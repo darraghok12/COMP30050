@@ -34,12 +34,14 @@ public class DeckOfCards {
 	// Returns the card at deck[cardsUsed] if the deck is non-empty
 	// Returns a special Null card otherwise
 	public PlayingCard deal(){
-		if (cardsUsed==DECK_SIZE){
-			PlayingCard nullCard = new PlayingCard("null", ' ', 0, 0);
-			return nullCard;
-		}
-		else{
-			return deck[cardsUsed++];
+		synchronized(deck){
+			if (cardsUsed==DECK_SIZE){
+				PlayingCard nullCard = new PlayingCard("null", ' ', 0, 0);
+				return nullCard;
+			}
+			else{
+				return deck[cardsUsed++];
+			}
 		}
 	}
 	
